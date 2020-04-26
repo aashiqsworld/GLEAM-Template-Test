@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848409ee8ba454f42a5ddff137688a27, type: 3}
+  m_Name: ReferenceImageLibrary
+  m_EditorClassIdentifier: 
+  m_GuidLow: 5117596129422862393
+  m_GuidHigh: 10983272907094368150
+  m_Images:
+  - m_SerializedGuid:
+      m_GuidLow: 4799903476806010710
+      m_GuidHigh: 16224200409626089895
+    m_SerializedTextureGuid:
+      m_GuidLow: 14150415204692571866
+      m_GuidHigh: 12740899117577510793
+    m_Size: {x: 0.297, y: 0.23754199}
+    m_SpecifySize: 1
+    m_Name: Kitchen_Marker
+    m_Texture: {fileID: 0}
