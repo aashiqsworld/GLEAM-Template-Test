@@ -110,6 +110,7 @@ public class GLEAMBehaviour : MonoBehaviour
     List<sample> localSamples;
     List<sample[]> sampleList;
 
+    private long frameStartTime;
     int maxListCount = 10;
 
     // LOS variables
@@ -186,6 +187,7 @@ public class GLEAMBehaviour : MonoBehaviour
 
     public void GLEAM_Update(Camera sampleCam, RenderTexture cameraImage)
     {
+        frameStartTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         if (running)
             return;
         sampleCamera = sampleCam;
@@ -259,7 +261,6 @@ public class GLEAMBehaviour : MonoBehaviour
 
         if (localSamples.Count == 0)
         {
-            Debug.Log("Returning");
             return;
         }
 
@@ -297,6 +298,7 @@ public class GLEAMBehaviour : MonoBehaviour
      */
     void generateRadianceSamples(List<sample> samples)
     {
+        print("generateRadianceSamples() START: " + (DateTimeOffset.Now.ToUnixTimeMilliseconds() - frameStartTime));
         // Initialize variables
         Ray ray;
         RaycastHit hit;
@@ -438,6 +440,8 @@ public class GLEAMBehaviour : MonoBehaviour
             }
         }
         //writeToFile("./rawData.txt", text, false);
+
+        print("generateRadianceSamples() END: " + (DateTimeOffset.Now.ToUnixTimeMilliseconds() - frameStartTime));
         return;
     }
 
@@ -522,6 +526,7 @@ public class GLEAMBehaviour : MonoBehaviour
     long idw2starttime, idw2endtime, idw2SumTime;
     private void composeCubemap(float distanceBetweenSamples)
     {
+        print("composeCubemap() START: " + (DateTimeOffset.Now.ToUnixTimeMilliseconds() - frameStartTime));
 
         int totalSamples = 0;
 
@@ -573,6 +578,22 @@ public class GLEAMBehaviour : MonoBehaviour
             }
         }
         idw1endtime = CurrentTimeMillis();
+
+        print("composeCubemap() END: " + (DateTimeOffset.Now.ToUnixTimeMilliseconds() - frameStartTime));
+        // print("sumslist size :" + sumsList.Count);
+        // print("sumslist[0] size: " + sumsList[0].Length);
+        // print("sumslist[1] size: " + sumsList[1].Length);
+
+        // print("weightslist size :" + weightsList.Count);
+        // print("weightslist[0] size: " + weightsList[0].Length);
+        // print("weightslist[1] size: " + weightsList[1].Length);
+
+        for(int i = 0; i < 10; i++)
+        {
+            print("sumslist[0][" + i + "]: " + sumsList[0][i]);
+            print("sumslist[1][" + (i + 100) + "]: " + sumsList[1][i+100]);
+        }
+
         calcPixelVals();
 
         if (debug && runCount <= testRuns)
@@ -587,6 +608,8 @@ public class GLEAMBehaviour : MonoBehaviour
     // Iterate through Cubemap pixel and set the pixel value based on average of its neighborhood sample pixels
     void calcPixelVals()
     {
+        print("calcPixelVals() START: " + (DateTimeOffset.Now.ToUnixTimeMilliseconds() - frameStartTime));
+
 
         Color[] faceColorAvgs = new Color[6];
         int faceColorCount = 0;
@@ -627,6 +650,9 @@ public class GLEAMBehaviour : MonoBehaviour
                 }
             }
         }
+
+        print("calcPixelVals() END: " + (DateTimeOffset.Now.ToUnixTimeMilliseconds() - frameStartTime));
+
     }
 
     Color FillHoles2(Color[] faceColors)

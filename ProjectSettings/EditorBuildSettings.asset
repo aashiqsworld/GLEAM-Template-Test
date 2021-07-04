@@ -14,4 +14,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/DisplacementOrb.unity
     guid: 008525a47e9e646ed860575b8fa89b28
-  m_configObjects: {}
+  m_configObjects:
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: e4f4eca9fcb784dacb6eee5537a100bb,
+      type: 2}
